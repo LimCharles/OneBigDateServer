@@ -18,6 +18,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import app.components.StudentComponent;
+import app.components.StudentMatchDTO;
+import app.entity.InterestCertificate;
 import app.entity.Student;
 
 @Component
@@ -91,5 +93,13 @@ public class StudentController {
 	public Student findStudent(
 		@QueryParam("studentId") int studentId) {
 		return studentComponent.findStudent(studentId);			
+	}
+	
+	@Path("/match")
+	@GET
+	@Produces(MediaType.APPLICATION_JSON)
+	public List<StudentMatchDTO> matchStudent(
+		@QueryParam("studentId") int studentId) {
+			return studentComponent.matchStudent(studentId);
 	}
 }
