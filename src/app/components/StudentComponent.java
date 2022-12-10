@@ -108,11 +108,10 @@ public class StudentComponent {
 		
 		// get all single students
 		List<Student> allSingleStudents = studentRepo.findByIsSingle(false);
-		System.out.println(allSingleStudents);
 		
 		for (Student s : allSingleStudents) {
-			Long currId = s.getId();
-			if (currId == student.getId()) {
+			// skip if current student is original student
+			if (s.getId() == student.getId()) {
 				break;
 			}
 
@@ -138,7 +137,6 @@ public class StudentComponent {
 			// if so, increment match
 			for (InterestCertificate ic : currentStudentInterests) {
 				for (InterestCertificate sic : studentInterests) {
-					// skip if current student is original student
 					if (sic.getInterestId().equals(ic.getInterestId())) {
 						match += 1;
 						break;
@@ -148,7 +146,7 @@ public class StudentComponent {
 			double compatibility = (match/totalInterests) * 100;
 			studentMatch.setCompatibility(compatibility);
 			
-			// filter out students with more than 0% compatibility
+			// filter out students with less than 0% compatibility
 			if (compatibility > 0) {
 				// compute for distance from student
 				double longitude1 = Math.toRadians(student.getLongitude());

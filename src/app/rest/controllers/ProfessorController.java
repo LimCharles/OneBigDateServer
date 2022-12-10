@@ -18,6 +18,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import app.components.ProfessorComponent;
+import app.components.ProfessorMatchDTO;
 import app.entity.Professor;
 import app.entity.Student;
 
@@ -95,5 +96,13 @@ public class ProfessorController {
 	public Professor findProfessor(
 		@QueryParam("employeeId") int employeeId) {
 		return professorComponent.findProfessor(employeeId);			
+	}
+	
+	@Path("/match")
+	@GET
+	@Produces(MediaType.APPLICATION_JSON)
+	public List<ProfessorMatchDTO> matchStudent(
+		@QueryParam("employeeId") int employeeId) {
+			return professorComponent.matchProfessor(employeeId);
 	}
 }

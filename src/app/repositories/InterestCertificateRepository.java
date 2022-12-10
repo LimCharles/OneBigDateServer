@@ -12,4 +12,5 @@ public interface InterestCertificateRepository extends JpaRepository<InterestCer
 	public InterestCertificate findByStudentIdAndInterestId(Long studentId, Long interestId);
 	public List<InterestCertificate> findByStudentId(Long studentId);
 	public InterestCertificate findByProfessorIdAndInterestId(Long professorId, Long interestId);
+	public List<InterestCertificate> findByProfessorId(Long professorId);
 }
